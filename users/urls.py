@@ -6,5 +6,6 @@ app_name = 'users'
 
 urlpatterns = [
     path('', index, name="index"),
+    path('', index, name="file-upload"),
 
 ]

@@ -1,0 +1,1 @@
+web: gunicorn owncloud.wsgi --log-file -
