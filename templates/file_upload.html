@@ -1,0 +1,52 @@
+{% extends 'auth_head.html' %}
+{% block content %}
+<style>
+    body{
+        background-color: white;
+    }
+</style>
+<div class="container">
+<h1>File Sharing</h1>
+<a href="{% url 'account_logout' %}" class="btn btn-danger btn-lg">Logout</a>
+<a href="{% url 'users:file-list' %}" class="btn btn-danger btn-lg">View All Files</a>
+{{msg}}
+<div class="container">
+    <form method="POST" id="uploadForm" action="{% url 'users:file-upload' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>{{ form.non_field_errors }}</p>
+
+        <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+        <p>
+            {{ form.docfile.errors }}
+            <input type="file" name="docfile" required="" id="id_docfile" required>
+        </p>
+        <!-- <input type="file" name="file" /> -->
+        <button class="btn btn-block btn-info" id="submitBtn" type="button" onclick="submitForm()">Upload</button>
+        <p id="displayMsg" style="display: none;color:gray"></p>
+        <div id="loader-div" style="display: none;width: 100%;flex-direction: row;justify-content: center;">
+        <div class="loader mt-4" style="align-self:center"></div>
+    </div>
+    </form>
+</div>
+</div>
+<script>
+    function submitForm(){
+        if(document.getElementById("id_docfile").value == ""){
+            alert("Please upload file before submitting");
+            return;
+        }
+        document.getElementById("loader-div").style.display = "flex";
+        document.getElementById("submitBtn").disabled = true;
+        document.getElementById("displayMsg").innerHTML = "The file upload is in progress. Please be patient!";
+        document.getElementById("uploadForm").submit();
+        // window.onbeforeunload = confirmExit;
+        
+    }
+    function confirmExit() {
+        if(document.getElementById("id_docfile").value == ""){
+            return true;
+        }
+        return "You have attempted to leave this page while file is uploading. Are you sure?";
+    }
+</script>
+{% endblock %}

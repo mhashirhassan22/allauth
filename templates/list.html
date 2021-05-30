@@ -1,0 +1,47 @@
+{% extends 'auth_head.html' %}
+{% block content %}
+<style>
+    body{
+        background-color: white;
+    }
+</style>
+<div class="container">
+<h1 class="mt-5">File Sharing</h1>
+<a href="{% url 'account_logout' %}" class="btn btn-danger btn-lg mt-5">Logout</a>
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+            <th>
+                File Path
+            </th>
+            <th>
+                Uploded at
+            </th>
+            <th>
+                File ID
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for file in list %}
+            <tr>
+                <td>
+                    <a href="{{file.file_path}}" style="font-size:large;">{{file.file_path}}</a>
+                    
+                </td>
+                <td>
+                    {{file.created_at}}
+                </td>
+                <td>
+                    {{file.file_id}}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+</div>
+
+{% endblock %}

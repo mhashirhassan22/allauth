@@ -1,1 +1,1 @@
-web: gunicorn owncloud.wsgi --log-file -
+web: gunicorn owncloudweb.wsgi --log-file -
