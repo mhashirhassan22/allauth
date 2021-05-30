@@ -5,7 +5,7 @@
         background-color: white;
     }
 </style>
-<div class="container" style="padding-bottom: 150px;padding-top: 50px;">
+<div class="container" style="padding-bottom: 100px;padding-top: 50px;">
 <h1>File Sharing</h1>
 <a href="{% url 'account_logout' %}" class="btn btn-danger btn-lg py-5">Logout</a>
 <a href="{% url 'users:file-list' %}" class="btn btn-danger btn-lg">View All Files</a>
@@ -23,7 +23,7 @@
         <!-- <input type="file" name="file" /> -->
         <button class="btn btn-block btn-lg" id="submitBtn" type="button" onclick="submitForm()" style="background-color: #1A237E;color:white">Upload</button>
         <p id="displayMsg" style="display: none;color:gray"></p>
-        <div id="loader-div" style="display: none;width: 100%;flex-direction: row;justify-content: center;">
+        <div id="loader-div" style="display: none;width: 100%;flex-direction: row;justify-content: center; padding-top: 16px;">
         <div class="loader mt-4" style="align-self:center"></div>
     </div>
     </form>
