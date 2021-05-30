@@ -52,6 +52,7 @@ django-markdown-deux==1.0.5
 django-model-utils==4.0.0
 django-redis==4.11.0
 django-rest-resetpassword==0.1.2
+django-sphinx==2.2.4
 django-storages==1.6.5
 django-stubs==1.4.0
 django-tenants==2.2.3
@@ -116,6 +117,7 @@ PyJWT==2.1.0
 pylint==2.4.4
 pylint-django==2.0.13
 pylint-plugin-utils==0.6
+pyocclient==0.6
 pyparsing==2.4.6
 PySocks==1.7.1
 pytest==5.3.1
