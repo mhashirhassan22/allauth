@@ -1,27 +1,27 @@
-{% extends 'auth_head.html' %}
-{% block content %}
+{% extends 'index.html' %}
+{% block container %}
 <style>
     body{
         background-color: white;
     }
 </style>
-<div class="container">
+<div class="container" style="padding-bottom: 150px;padding-top: 50px;">
 <h1>File Sharing</h1>
-<a href="{% url 'account_logout' %}" class="btn btn-danger btn-lg">Logout</a>
+<a href="{% url 'account_logout' %}" class="btn btn-danger btn-lg py-5">Logout</a>
 <a href="{% url 'users:file-list' %}" class="btn btn-danger btn-lg">View All Files</a>
 {{msg}}
-<div class="container">
-    <form method="POST" id="uploadForm" action="{% url 'users:file-upload' %}" enctype="multipart/form-data">
+<div class="container py-5">
+    <form style="padding-top: 50px;" method="POST" id="uploadForm" action="{% url 'users:file-upload' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <p>{{ form.non_field_errors }}</p>
 
-        <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+        <p style="padding-top: 20px;">{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
         <p>
             {{ form.docfile.errors }}
             <input type="file" name="docfile" required="" id="id_docfile" required>
         </p>
         <!-- <input type="file" name="file" /> -->
-        <button class="btn btn-block btn-info" id="submitBtn" type="button" onclick="submitForm()">Upload</button>
+        <button class="btn btn-block btn-lg" id="submitBtn" type="button" onclick="submitForm()" style="background-color: #1A237E;color:white">Upload</button>
         <p id="displayMsg" style="display: none;color:gray"></p>
         <div id="loader-div" style="display: none;width: 100%;flex-direction: row;justify-content: center;">
         <div class="loader mt-4" style="align-self:center"></div>

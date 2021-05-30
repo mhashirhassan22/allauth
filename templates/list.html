@@ -1,14 +1,13 @@
-{% extends 'auth_head.html' %}
-{% block content %}
+{% extends 'index.html' %}
+{% block container %}
 <style>
     body{
         background-color: white;
     }
 </style>
-<div class="container">
-<h1 class="mt-5">File Sharing</h1>
+<div class="container" style="padding-top: 50px;padding-bottom: 150px;">
 <a href="{% url 'account_logout' %}" class="btn btn-danger btn-lg mt-5">Logout</a>
-<div class="container mt-5">
+<div class="container" style="padding-top: 30px;">
     <table class="table">
         <thead>
             <tr>

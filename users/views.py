@@ -24,8 +24,8 @@ def file_upload(request):
         with open('temp/'+str(backup_file), 'wb+') as destination:
             for chunk in backup_file.chunks():
                 destination.write(chunk)
-        temp_path = os.path.join(settings.BASE_DIR, "temp\\" + str(backup_file))
-        oc.put_file('testdir/', str(os.path.join(settings.BASE_DIR, "temp\\" + str(backup_file))))
+        temp_path = os.path.join(settings.BASE_DIR, "temp/" + str(backup_file))
+        oc.put_file('testdir/', str(os.path.join(settings.BASE_DIR, "temp/" + str(backup_file))))
         link_info = oc.share_file_with_link('testdir/'+str(backup_file),perms=31)
         os.remove(temp_path)
         try:
