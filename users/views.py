@@ -10,7 +10,8 @@ oc = owncloud.Client('https://lblostenze791.owncloud.online/')
 oc.login("admin", "teroarrund90")
 
 def index(request):
-    return render(request, 'index.html')
+    banner = BannerImage.objects.all()
+    return render(request, 'index.html',{'banner':banner})
 
 
 

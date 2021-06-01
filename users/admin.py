@@ -17,7 +17,6 @@ class UserAdmin(UserAdmin):
 
 
 class FileAdmin(admin.ModelAdmin):
-    # form = Productform
     list_display = ('user','file_path', 'created_at','file_id')
 
     def save_model(self, request, obj, form, change):
@@ -25,4 +24,12 @@ class FileAdmin(admin.ModelAdmin):
         obj.save()
 
 admin.site.register(FileUpload, FileAdmin)
+
+
+
+class BannerImageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'img',)
+    list_editable = ('img',)
+
+admin.site.register(BannerImage, BannerImageAdmin)
 

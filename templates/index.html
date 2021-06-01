@@ -14,7 +14,6 @@
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <script src="https://use.fontawesome.com/5106f37262.js"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'css/loader.css' %}">
  
 </head>
 
@@ -24,7 +23,7 @@
         <nav class="navbar">
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="/" class="nav-link">HOME</a>
+                    <a href="#" class="nav-link">HOME</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">ABOUT</a>
@@ -52,20 +51,28 @@
 
 
 <div class="container" >
-    {% block container %}
+    <div class="row">
             <div class="image1">
                 <!-- Swiper -->
                 <div class="swiper-container mySwiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="https://images.unsplash.com/photo-1565273601018-d1da7cfed4f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1044&q=80" alt="slider image 1" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="https://images.unsplash.com/photo-1580691746056-4badd831b86e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=389&q=80" alt="" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80" alt="" />
-                        </div>
+                        {% if banner %}
+                            {% for obj in banner %}
+                                <div class="swiper-slide">
+                                    <img src="{{obj.img.url}}" alt="slider image {{obj.id}}" />
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="swiper-slide">
+                                <img src="https://images.unsplash.com/photo-1565273601018-d1da7cfed4f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1044&q=80" alt="slider image 1" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://images.unsplash.com/photo-1580691746056-4badd831b86e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=389&q=80" alt="" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=751&q=80" alt="" />
+                            </div>
+                        {% endif %}
 
                     </div>
                     <div class="swiper-button-next"></div>
@@ -73,12 +80,12 @@
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
-        <div class="bg" >
+        <div class="bg">
             <svg viewBox="0 0 100 100" id="bg" >
             </svg>
-            <a class="download2 mr-4" href="{% url 'account_login' %}">Login</a>
+            <a class="download2" href="#">Login</a>
         </div>
-{% endblock %}
+    </div>
 </div>
  <footer class="mainfooter" role="contentinfo">
   <div class="footer-middle">
