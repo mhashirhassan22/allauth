@@ -6,7 +6,11 @@
     }
 </style>
 <div class="container" style="padding-top: 50px;padding-bottom: 150px;">
-<a href="{% url 'account_logout' %}" class="btn btn-danger btn-lg mt-5">Logout</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'account_logout' %}" class="btn btn-danger btn-lg mt-5">Logout</a>
+    {% else %}
+        <a href="{% url 'account_login' %}" class="btn btn-danger btn-lg mt-5">Login</a>
+    {% endif %}
 <div class="container" style="padding-top: 30px;">
     <h2>OPS! Owncloud is not working at the moment.</h2>
     <p style="padding-top: 20px;color: gray;">Tried checking owncloud credentials at <a href="{% url 'admin:index' %}">admin panel</a>
