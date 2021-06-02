@@ -33,3 +33,11 @@ class BannerImageAdmin(admin.ModelAdmin):
 
 admin.site.register(BannerImage, BannerImageAdmin)
 
+
+
+class OwnCloudAdmin(admin.ModelAdmin):
+    list_display = ('id', 'username', 'password', 'client_link')
+    list_editable = ('username', 'password', 'client_link')
+
+admin.site.register(OwnCloudCredential ,OwnCloudAdmin)
+

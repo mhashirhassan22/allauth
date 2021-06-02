@@ -6,13 +6,20 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import *
 from .models import *
 
-oc = owncloud.Client('https://lblostenze791.owncloud.online/')
-oc.login("admin", "teroarrund90")
 
 def index(request):
-    banner = BannerImage.objects.all()
-    return render(request, 'index.html',{'banner':banner})
-
+    cred = OwnCloudCredential.objects.all().first()
+    username, password = cred.username, cred.password
+    if not username or not password:
+        username = "admin"
+        password = "teroarrund90"
+    try:
+        oc = owncloud.Client('https://lblostenze791.owncloud.online/')
+        oc.login(username, password)
+        banner = BannerImage.objects.all()
+        return render(request, 'index.html',{'banner':banner})
+    except:
+        return render(request, 'err.html', {'cred':cred})
 
 
 @login_required

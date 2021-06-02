@@ -27,3 +27,15 @@ class FileUpload(models.Model):
 
 class BannerImage(models.Model):
     img = models.ImageField()
+
+
+class OwnCloudCredential(models.Model):
+    client_link = models.CharField(max_length=2000, default='https://lblostenze791.owncloud.online/')
+    username = models.CharField(max_length=256)
+    password = models.CharField(max_length=100)
+
+try:
+    if OwnCloudCredential.objects.all().count() < 1:
+        obj = OwnCloudCredential.objects.create(username="admin", password="teroarrund90")
+except:
+    pass

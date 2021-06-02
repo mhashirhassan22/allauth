@@ -48,7 +48,7 @@
             </div>
         </nav>
 </header>
-
+{% block container %}
 
 <div class="container" >
     <div class="row">
@@ -83,10 +83,15 @@
         <div class="bg">
             <svg viewBox="0 0 100 100" id="bg" >
             </svg>
-            <a class="download2" href="#">Login</a>
+            {% if user.is_authenticated %}
+                <a class="download2" href="{% url 'account_logout' %}">Logout</a>
+            {% else %}
+                <a class="download2" href="{% url 'account_login' %}">Login</a>
+            {% endif %}
         </div>
     </div>
 </div>
+{% endblock %}
  <footer class="mainfooter" role="contentinfo">
   <div class="footer-middle">
   <div class="container">
