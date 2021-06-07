@@ -33,6 +33,17 @@ def file_upload(request):
         with open('temp/'+str(backup_file), 'wb+') as destination:
             for chunk in backup_file.chunks():
                 destination.write(chunk)
+        cred = OwnCloudCredential.objects.all().first()
+        client, username, password = cred.client_link, cred.username, cred.password
+        if not username or not password or not client:
+            client = "https://lblostenze791.owncloud.online/"
+            username = "admin"
+            password = "teroarrund90"
+        try:
+            oc = owncloud.Client(client)
+            oc.login(username, password)
+        except:
+            return render(request, 'err.html', {'cred':cred})
         temp_path = os.path.join(settings.BASE_DIR, "temp/" + str(backup_file))
         oc.put_file('testdir/', str(os.path.join(settings.BASE_DIR, "temp/" + str(backup_file))))
         link_info = oc.share_file_with_link('testdir/'+str(backup_file),perms=31)
