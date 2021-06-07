@@ -40,13 +40,17 @@ def file_upload(request):
             username = "admin"
             password = "teroarrund90"
         try:
+            print(client)
+            print(username)
+            print(password)
             oc = owncloud.Client(client)
             oc.login(username, password)
         except:
             return render(request, 'err.html', {'cred':cred})
+
         temp_path = os.path.join(settings.BASE_DIR, "temp/" + str(backup_file))
-        oc.put_file('testdir/', str(os.path.join(settings.BASE_DIR, "temp/" + str(backup_file))))
-        link_info = oc.share_file_with_link('testdir/'+str(backup_file),perms=31)
+        oc.put_file('shared_files/', str(os.path.join(settings.BASE_DIR, "temp/" + str(backup_file))))
+        link_info = oc.share_file_with_link('shared_files/'+str(backup_file),perms=31)
         os.remove(temp_path)
         try:
             obj = FileUpload()
