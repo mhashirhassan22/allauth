@@ -9,12 +9,13 @@ from .models import *
 
 def index(request):
     cred = OwnCloudCredential.objects.all().first()
-    username, password = cred.username, cred.password
-    if not username or not password:
+    client, username, password = cred.client_link, cred.username, cred.password
+    if not username or not password or not client:
+        client = "https://lblostenze791.owncloud.online/"
         username = "admin"
         password = "teroarrund90"
     try:
-        oc = owncloud.Client('https://lblostenze791.owncloud.online/')
+        oc = owncloud.Client(client)
         oc.login(username, password)
         banner = BannerImage.objects.all()
         return render(request, 'index.html',{'banner':banner})
