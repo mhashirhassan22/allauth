@@ -18,7 +18,9 @@
                     <div class="row mb-4 px-3">
                         <h4 class="mb-0 mr-4 mt-2">The Best File Sharing Platform</h4>
                     </div>
-                    <form method="POST" action="{% url 'account_signup' %}">
+                    <form id="signupForm" method="POST" action="{% url 'account_signup' %}">
+                        <p id="error" style="color: rgba(124, 55, 55, 0.699);display: none;font-weight: bolder;font-size: large;">
+                        </p>
                         {% csrf_token %}
                         {% if form.errors %}
                         {% for field in form %}
@@ -35,19 +37,19 @@
                         {% endif %}
                     <div class="row px-3"> <label class="mb-1">
                             <h6 class="mb-0 text-sm">Email Address *</h6>
-                        </label> <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address" required> 
+                        </label> <input class="mb-4" type="text" id="email" name="email" placeholder="Enter a valid email address" required> 
                     </div>
                     <div class="row px-3"> <label class="mb-1">
                         <h6 class="mb-0 text-sm">Username *</h6>
-                    </label> <input class="mb-4" type="text" name="username" placeholder="Enter unique username" required> 
+                    </label> <input class="mb-4" type="text" id="username" name="username" placeholder="Enter unique username" required> 
                 </div>
                     <div class="row px-3"> <label class="mb-1">
                             <h6 class="mb-0 text-sm">Password *</h6>
-                        </label> <input class="mb-4" type="password" name="password1" placeholder="Enter password" required> 
+                        </label> <input class="mb-4" type="password" id="password1" name="password1" placeholder="Enter password" required> 
                     </div>
                     <div class="row px-3"> <label class="mb-1">
                         <h6 class="mb-0 text-sm">Confirm Password *</h6>
-                    </label> <input class='mb-4' type="password" name="password2" placeholder="Confirm password" required> 
+                    </label> <input class='mb-4' type="password" id="password2" name="password2" placeholder="Confirm password" required> 
                 </div>
                 <div class="row px-3"> <label class="mb-1">
                     <h6 class="mb-0 text-sm">Address</h6>
@@ -55,12 +57,12 @@
             </div>
             <div class="row px-3"> <label class="mb-1">
                 <h6 class="mb-0 text-sm">Phone</h6>
-            </label> <input class="mb-4" type="text" name="phone" placeholder="Enter contact number"> 
+            </label> <input class="mb-4" type="text" id="phone" name="phone" placeholder="Enter contact number"> 
         </div>
                     <div class="row px-3 mb-4">
                          <a href="{% url 'account_reset_password' %}" class="ml-auto mb-0 text-sm">Forgot Password?</a>
                     </div>
-                    <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Signup</button> </div>
+                    <div class="row mb-3 px-3"> <button type="button" onclick="validateUser();" class="btn btn-blue text-center">Signup</button> </div>
 
 
                     <div class="row mb-4 px-3"> <small class="font-weight-bold" style="font-size: medium;">Already have an account? <a class="text-danger" href="{%url 'account_login'%}">Login</a></small> </div>
@@ -75,5 +77,83 @@
         </div>
     </div>
 </div>
+
+
+
+
+<script>
+    function usernameIsValid(username) {
+        return /^[0-9a-zA-Z_.-]+$/.test(username);
+    }
+    function emailIsValid(email){
+        return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
+    }
+    function passwordIsValid(password){
+        //>8 characters, atleast one small, atleast one capital, atleast one number, atleast one special character
+        return !(/^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/.test(password));
+    }
+    function phoneIsValid(phone){
+        return /^\d+$/.test(phone.substring(1));
+    }
+
+    
+function validateUser(){
+
+    var email = document.getElementById("email").value;
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password1").value;
+    var password2 = document.getElementById("password2").value;
+    var phone = document.getElementById("phone").value;
+    var error = document.getElementById("error");
+
+    if(email == "" || !emailIsValid(email)){
+        error.innerHTML = "Please enter valid email";
+        error.style.display = "block";
+        window.scrollTo(0,0);
+        return;
+
+    }
+    else if(username == "" || !usernameIsValid(username)){
+        error.innerHTML = "Please enter valid username";
+        error.style.display = "block";
+        window.scrollTo(0,0);
+        return;
+
+    }
+    else if(password == "" || !passwordIsValid(password)){
+        error.innerHTML = "Password must have:\n Minimum 8 characters \n >1 small letter \n >1 capital letter \n >1 special case letter" ;
+        error.style.display = "block";
+        window.scrollTo(0,0);
+        return;
+
+    }
+    else if(password2 == "" || password!=password2){
+        error.innerHTML = "Confirm password does not match.";
+        error.style.display = "block";
+        window.scrollTo(0,0);
+        return;
+    }
+    else if(phone == "" || !phoneIsValid(phone)){
+        error.innerHTML = "Please enter valid phone number";
+        error.style.display = "block";
+        window.scrollTo(0,0);
+        return;
+    }
+    else{
+        error.innerHTML = "";
+        error.style.display = "block";
+        document.getElementById("signupForm").submit();
+
+    }
+    
+    
+      
+}
+    
+
+      </script>
+    
+
+
 
 {% endblock %}
