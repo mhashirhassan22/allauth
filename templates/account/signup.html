@@ -39,11 +39,22 @@
                             <h6 class="mb-0 text-sm">Email Address *</h6>
                         </label> <input class="mb-4" type="text" id="email" name="email" placeholder="Enter a valid email address" required> 
                     </div>
-                    <div class="row px-3"> <label class="mb-1">
+                    <div class="row px-3"> 
+                        
+                        <label class="mb-1">
                             <h6 class="mb-0 text-sm">Password *</h6>
-                        </label> <input class="mb-4" type="password" id="password1" name="password1" placeholder="Enter password" required> 
+                        </label> 
+                        <input type="password" id="password1" name="password1" placeholder="Enter password" required> 
+                        
+                            <p class="mb-0 text-sm"  style="display: flex;flex-direction: row;justify-content: left;width: 100%;">
+                                <label class="mb-1" style="width: 100%;">
+                                    Show Password
+                                </label>
+                                
+                            <input class="mb-4" type="checkbox" onclick="togglePassword()">
+                            </p>
                     </div>
-                    <div class="row px-3"> <label class="mb-1">
+                    <div class="row px-3 mt-3"> <label class="mb-1">
                         <h6 class="mb-0 text-sm">Confirm Password *</h6>
                     </label> <input class='mb-4' type="password" id="password2" name="password2" placeholder="Confirm password" required> 
                 </div>
@@ -137,7 +148,14 @@ function validateUser(){
       
 }
     
-
+function togglePassword() {
+  var x = document.getElementById("password1");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
       </script>
     
 
