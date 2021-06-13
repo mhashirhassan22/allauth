@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'rl#98^bq4nv060#1sh+xrc943faw$vxotod*)zsamfa!((ch7+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -94,17 +94,12 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 5,
+        },
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -128,11 +123,14 @@ EMAIL_SUBJECT_PREFIX = 'The File Sharing Platform'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
 ACCOUNT_EMAIL_VERIFICATION = "none"
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGOUT_REDIRECT_URL ='/'
-LOGIN_REDIRECT_URL = "/"  # default to /accounts/profile 
+LOGIN_REDIRECT_URL = "/"  
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_LOGOUT_ON_GET = True
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

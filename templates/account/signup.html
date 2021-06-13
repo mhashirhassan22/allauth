@@ -40,10 +40,6 @@
                         </label> <input class="mb-4" type="text" id="email" name="email" placeholder="Enter a valid email address" required> 
                     </div>
                     <div class="row px-3"> <label class="mb-1">
-                        <h6 class="mb-0 text-sm">Username *</h6>
-                    </label> <input class="mb-4" type="text" id="username" name="username" placeholder="Enter unique username" required> 
-                </div>
-                    <div class="row px-3"> <label class="mb-1">
                             <h6 class="mb-0 text-sm">Password *</h6>
                         </label> <input class="mb-4" type="password" id="password1" name="password1" placeholder="Enter password" required> 
                     </div>
@@ -56,7 +52,7 @@
                 </label> <input class="mb-4" type="text" name="address" placeholder="Enter your address"> 
             </div>
             <div class="row px-3"> <label class="mb-1">
-                <h6 class="mb-0 text-sm">Phone</h6>
+                <h6 class="mb-0 text-sm">Phone *</h6>
             </label> <input class="mb-4" type="text" id="phone" name="phone" placeholder="Enter contact number"> 
         </div>
                     <div class="row px-3 mb-4">
@@ -89,8 +85,7 @@
         return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);
     }
     function passwordIsValid(password){
-        //>8 characters, atleast one small, atleast one capital, atleast one number, atleast one special character
-        return !(/^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/.test(password));
+        return password.length > 5;
     }
     function phoneIsValid(phone){
         return /^\d+$/.test(phone.substring(1));
@@ -100,7 +95,6 @@
 function validateUser(){
 
     var email = document.getElementById("email").value;
-    var username = document.getElementById("username").value;
     var password = document.getElementById("password1").value;
     var password2 = document.getElementById("password2").value;
     var phone = document.getElementById("phone").value;
@@ -113,15 +107,8 @@ function validateUser(){
         return;
 
     }
-    else if(username == "" || !usernameIsValid(username)){
-        error.innerHTML = "Please enter valid username";
-        error.style.display = "block";
-        window.scrollTo(0,0);
-        return;
-
-    }
     else if(password == "" || !passwordIsValid(password)){
-        error.innerHTML = "Password must have:\n Minimum 8 characters \n >1 small letter \n >1 capital letter \n >1 special case letter" ;
+        error.innerHTML = "Password must have atleast 5 characters" ;
         error.style.display = "block";
         window.scrollTo(0,0);
         return;
